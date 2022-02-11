@@ -29,6 +29,7 @@
 	Map<String, Object> param = new HashMap<String, Object>();
 	PointDAO dao = new PointDAO();
 	int x = dao.selectCount(param);
+
 	
 	%>
 	

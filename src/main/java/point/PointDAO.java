@@ -23,10 +23,6 @@ public class PointDAO {
 		return template.queryForObject(sql, Integer.class);
 	}
 	
-	public String printId(Map<String, Object> map) {
-		
-	}
-	
 	
 	
 
