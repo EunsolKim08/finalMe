@@ -1,3 +1,4 @@
+<%@page import="point.PointDTO"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="point.PointDAO"%>
@@ -29,8 +30,11 @@
 	Map<String, Object> param = new HashMap<String, Object>();
 	PointDAO dao = new PointDAO();
 	int x = dao.selectCount(param);
-
 	
+	PointDTO dto = new PointDTO();
+	dto.setId("ptest");
+	//dao.buySticker(dto);
+	//dao.selectPoint(dto);
 	%>
 	
 </body>
