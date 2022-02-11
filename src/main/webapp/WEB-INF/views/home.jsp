@@ -29,12 +29,13 @@
 	<%
 	Map<String, Object> param = new HashMap<String, Object>();
 	PointDAO dao = new PointDAO();
-	int x = dao.selectCount(param);
 	
-	PointDTO dto = new PointDTO();
-	dto.setId("ptest");
-	//dao.buySticker(dto);
-	//dao.selectPoint(dto);
+	PointDTO pdto = new PointDTO();
+	pdto.setId("ptest");
+	String id = pdto.getId();
+	dao.buySticker(pdto);
+	//구매시 포인트 차감dao.buySticker(dto);
+	//아이디를 통해 포인트 ㄱㄱ dao.getTotalPoint(id);
 	%>
 	
 </body>

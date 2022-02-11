@@ -1,9 +1,13 @@
 package point;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
@@ -11,8 +15,7 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 
 
 public class PointDAO {
-	
-	//부모의 인자생성자를 호출한다. 이때 application 내장객체를 매개변수로 전달한다.
+	@Autowired
 	JdbcTemplate template;
 	
 	public PointDAO() {
@@ -28,11 +31,16 @@ public class PointDAO {
 	
 	/*
 	 buySticker() : 스티커를 구매했을때 호출되는 함수.
-	 point가 5000만큼 차감되고 해당 id의 item에 sticker가 등록됨.
+	 해당 아이디가 가진 포인트(밥알)이 10000밥알 이상일때만 스티커가 구매가능하다.
+	 (밥알이 만개미만일 시에는 구매를 실패함. 
+	 나중에 int의 return 0과 1로 구매실패한거띄워도 될듯)
+	  
+	  구매완료시 해당 id의 item에 temOName에 등록됨.
 	 */
 	public void buySticker(final PointDTO dto) {
-		String sql = " UPDATE point SET point = point - 10000 "
-				
+		if(getTotalPoint(dto.getId())>=10000) {
+			String sql = " UPDATE point SET point = point - 10000 "
+					
 				+ " WHERE id=?";
 		
 			template.update(sql, new PreparedStatementSetter() {
@@ -42,33 +50,32 @@ public class PointDAO {
 			SQLException{
 				ps.setString(1, dto.getId());
 			}
-		});
+			});
+			getTotalPoint(dto.getId());
+			System.out.println(getTotalPoint(dto.getId()));
 			System.out.println("buyTicket()실행 완료");
-	}
-	
-	public int selectPoint(final PointDTO dto) {
-		String sql = " SELECT point FROM point "
-				
-				+ " WHERE id=? ";
+		}
+		else {
+			System.out.println("buyTicket()실행에 실패하셨습니다.");
+		}
 		
-			template.update(sql, new PreparedStatementSetter() {
-			
-			@Override
-			public void setValues(PreparedStatement ps ) throws
-			SQLException{
-				ps.setString(1, dto.getId());
-			}
-		});
-			System.out.println("selectPoint실행 완료");
-			System.out.println("11111");
-			
-			return 0;
 			
 	}
 	
-	public void ad
+	
+	/*
+	 포인트 테이블 해당아이디가 가진 토탈 포인트(밥알)을 가져온다.
+	 */
+	public int getTotalPoint(String id) {
+		String sql2 = "select point from point "
+				+ " WHERE id= '"+id+"'";
+	 
+		System.out.println(sql2);
+		//쿼리문에서 count(*)을 통해 반환되는 값을 정수형태로 가져온다.
+		System.out.print("포인트는: "+template.queryForObject(sql2, Integer.class));
 		
+		return template.queryForObject(sql2, Integer.class);
+	}
 	
 	
-
 }
