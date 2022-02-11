@@ -1,3 +1,4 @@
+<%@page import="point.PointDAO"%>
 <%@page import="point.PointDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -14,6 +15,7 @@
 PointDTO dto = new PointDTO();
 dto.setSticker("sticker");
 dto.setId("pr");
+
 %>
 <body>
 <div class="container">

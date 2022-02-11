@@ -1,3 +1,6 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="point.PointDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>  
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -22,6 +25,12 @@
 			이모티콘 디스플레이 페이지 
 		</a>
 	</li>
+	<%
+	Map<String, Object> param = new HashMap<String, Object>();
+	PointDAO dao = new PointDAO();
+	int x = dao.selectCount(param);
+	
+	%>
 	
 </body>
 </html>
