@@ -3,16 +3,27 @@ package com.kosmo.finalMe;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import point.JdbcTemplateConst;
 import point.PointDAO;
 import point.PointDTO;
 
 @Controller
 public class EmoticonController {
+	private JdbcTemplate template;
+	@Autowired
+	public void setTemplate(JdbcTemplate template) {
+		this.template = template;
+		System.out.println("@Autowired -> JDBCTemplate 연결 성공");
+		
+		JdbcTemplateConst.template = this.template;
+	}
+	
 	private PointDAO dao;
 	
 	//이모티콘 디스플레이 페이지
