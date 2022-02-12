@@ -1,5 +1,6 @@
 package point;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +10,11 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.PreparedStatementSetter;
+
+import item.ItemDAO;
+import item.ItemDTO;
 
 
 
@@ -37,8 +42,10 @@ public class PointDAO {
 	  
 	  구매완료시 해당 id의 item에 temOName에 등록됨.
 	 */
-	public void buySticker(final PointDTO dto) {
-		if(getTotalPoint(dto.getId())>=10000) {
+	public void buySticker(final PointDTO pdto, final ItemDTO idto) {
+		ItemDAO idao = new ItemDAO();
+		
+		if(getTotalPoint(pdto.getId())>=10000) {
 			String sql = " UPDATE point SET point = point - 10000 "
 					
 				+ " WHERE id=?";
@@ -48,11 +55,16 @@ public class PointDAO {
 			@Override
 			public void setValues(PreparedStatement ps ) throws
 			SQLException{
-				ps.setString(1, dto.getId());
+				ps.setString(1, pdto.getId());
+				idto.setId("admin");
+				idto.setTemOname("pr3");
+				getItem(idto);
 			}
 			});
-			getTotalPoint(dto.getId());
-			System.out.println(getTotalPoint(dto.getId()));
+			
+			
+			getTotalPoint(pdto.getId());
+			System.out.println(getTotalPoint(pdto.getId()));
 			System.out.println("buyTicket()실행 완료");
 		}
 		else {
@@ -72,10 +84,34 @@ public class PointDAO {
 	 
 		System.out.println(sql2);
 		//쿼리문에서 count(*)을 통해 반환되는 값을 정수형태로 가져온다.
-		System.out.print("포인트는: "+template.queryForObject(sql2, Integer.class));
+		System.out.println("포인트는: "+template.queryForObject(sql2, Integer.class));
 		
 		return template.queryForObject(sql2, Integer.class);
 	}
 	
+	
+	
+	//사용자 아이디를 얻어와서 거기서 구매한 스티커를 장착함.
+	public void getItem(final ItemDTO idto) {
+		template.update( new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) 
+					throws SQLException {
+			String sql = " INSERT INTO haveItem (id, temOname )"
+					+" VALUES (?,?)";
+			PreparedStatement psmt =
+					con.prepareStatement(sql);
+			psmt.setString(1, idto.getId());
+			psmt.setString(2, idto.getTemOname());
+			
+			System.out.println(sql);
+			System.out.println("사용자계정 getItem() 실행완료3 ");
+			return psmt;
+			}
+			
+		});
+		
+	}
 	
 }
