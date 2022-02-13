@@ -73,7 +73,6 @@ public class PointDAO {
 			
 	}
 	public void buySticker2(final PointDTO pdto, final ItemDTO idto) {
-		final ItemDAO idao = new ItemDAO();
 		
 		if(getTotalPoint(pdto.getId())>=10000) {
 			String sql = " UPDATE point SET point = point - 10000 "
@@ -89,7 +88,7 @@ public class PointDAO {
 					ps.setString(1, pdto.getId());
 					idto.setId(pdto.getId());
 					idto.setTemOname("pr");
-					idao.getItem(idto);
+					//idao.getItem(idto);
 					//idao.getItem2(idto);
 				}
 				});
@@ -115,7 +114,7 @@ public class PointDAO {
 	 포인트 테이블 해당아이디가 가진 토탈 포인트(밥알)을 가져온다.
 	 */
 	public int getTotalPoint(String id) {
-		String sql2 = "select point from point "
+		String sql2 = " select point from point "
 				+ " WHERE id= '"+id+"'";
 	 
 		System.out.println(sql2);
@@ -123,6 +122,39 @@ public class PointDAO {
 		System.out.println("포인트는: "+template.queryForObject(sql2, Integer.class));
 		
 		return template.queryForObject(sql2, Integer.class);
+	}
+	
+	public void addPoint(String tname,final PointDTO pdto) {
+		//포인트의 획득 경로에 따라 얻는 달라짐.
+		int pt = 0;
+		
+		if(tname.equals("review")) {
+			pt = 1000;
+		}else if(tname.equals("popularComments")) {
+			pt = 2000;
+		}else if(tname.equals("popularPhoto")) {
+			pt = 5000;
+		}
+		
+		String sql = " UPDATE point SET point = point + "+ pt
+					
+				+ " WHERE id=?";
+		
+		try {
+			template.update(sql, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement ps ) throws
+				SQLException{
+					ps.setString(1, pdto.getId());
+				}
+				});
+			
+			
+		}catch(Exception e) {
+			System.out.println(" addPoint() 실행중 오류");
+		}
+	
 	}
 	
 	
