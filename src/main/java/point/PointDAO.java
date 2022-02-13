@@ -124,6 +124,7 @@ public class PointDAO {
 		return template.queryForObject(sql2, Integer.class);
 	}
 	
+	//지급기준에 따라 포인트가 더해짐
 	public void addPoint(String tname,final PointDTO pdto) {
 		//포인트의 획득 경로에 따라 얻는 달라짐.
 		int pt = 0;
@@ -155,6 +156,40 @@ public class PointDAO {
 			System.out.println(" addPoint() 실행중 오류");
 		}
 	
+	}
+	
+	//카카오페이 결제시 밥알(포인트)가 충전됨.
+	public void buyPonts(final PointDTO pdto) {
+		int pt =0;
+		
+		int payResult=0;
+		
+		if(payResult == 1) {
+			pt = 50000;
+		}else if(payResult == 2) {
+			pt = 157500;
+		}else if(payResult == 3) {
+		    pt = 275000;
+		}
+		String sql = " UPDATE point SET point = point + "+ pt
+				
+				+ " WHERE id=?";
+		
+		try {
+			template.update(sql, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement ps ) throws
+				SQLException{
+					ps.setString(1, pdto.getId());
+				}
+				});
+			
+			
+		}catch(Exception e) {
+			System.out.println(" addPoint() 실행중 오류");
+		}
+		
 	}
 	
 	
