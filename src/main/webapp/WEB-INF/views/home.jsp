@@ -27,6 +27,11 @@
 			이모티콘 디스플레이 페이지 
 		</a>
 	</li>
+	<li>
+		<a href="./emoticon/practice.do" target="_blank">
+			카카오페이 실행 연습페이지
+		</a>
+	</li>
 	<%
 	Map<String, Object> param = new HashMap<String, Object>();
 	PointDAO pdao = new PointDAO();
@@ -44,7 +49,7 @@
 	//pdao.buySticker(pdto,idto);
 	//구매시 포인트 차감dao.buySticker(dto);
 	//아이디를 통해 포인트 ㄱㄱ dao.getTotalPoint(id);
-	pdao.addPoint("review", pdto);
+	//pdao.addPoint("review", pdto);
 	%>
 	
 </body>
