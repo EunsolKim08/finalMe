@@ -29,19 +29,19 @@
 	</li>
 	<%
 	Map<String, Object> param = new HashMap<String, Object>();
-	PointDAO dao = new PointDAO();
+	PointDAO pdao = new PointDAO();
 	
 	PointDTO pdto = new PointDTO();
 	ItemDTO idto = new ItemDTO();
 	
-	pdto.setId("ptest");
+	pdto.setId("ptest2");
 	
 	
 	String id = pdto.getId();
 	//idto.setId(id);
 	//idto.setTemOname("pr2");
 	
-	dao.buySticker(pdto,idto);
+	pdao.buySticker(pdto,idto);
 	//구매시 포인트 차감dao.buySticker(dto);
 	//아이디를 통해 포인트 ㄱㄱ dao.getTotalPoint(id);
 	%>

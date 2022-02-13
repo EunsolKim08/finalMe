@@ -43,33 +43,69 @@ public class PointDAO {
 	  구매완료시 해당 id의 item에 temOName에 등록됨.
 	 */
 	public void buySticker(final PointDTO pdto, final ItemDTO idto) {
-		ItemDAO idao = new ItemDAO();
+		final ItemDAO idao = new ItemDAO();
+		
+		if(getTotalPoint(pdto.getId())>=10000) {
+			String sql = " UPDATE point SET point = point - 10000 "
+					
+				+ " WHERE id=?";
+			template.update(sql, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement ps ) throws
+				SQLException{
+					ps.setString(1, pdto.getId());
+					idto.setId(pdto.getId());
+					idto.setTemOname("pr");
+					idao.getItem(idto);
+					//idao.getItem2(idto);
+				}
+				});
+			getTotalPoint(pdto.getId());
+			System.out.println(getTotalPoint(pdto.getId()));
+			System.out.println("buyTicket()실행 완료");
+		}
+		else {
+			System.out.println(" buyTicket()오류 :포인트 잔액 부족");
+		}
+		
+		
+			
+	}
+	public void buySticker2(final PointDTO pdto, final ItemDTO idto) {
+		final ItemDAO idao = new ItemDAO();
 		
 		if(getTotalPoint(pdto.getId())>=10000) {
 			String sql = " UPDATE point SET point = point - 10000 "
 					
 				+ " WHERE id=?";
 		
+		try {
 			template.update(sql, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement ps ) throws
+				SQLException{
+					ps.setString(1, pdto.getId());
+					idto.setId(pdto.getId());
+					idto.setTemOname("pr");
+					idao.getItem(idto);
+					//idao.getItem2(idto);
+				}
+				});
 			
-			@Override
-			public void setValues(PreparedStatement ps ) throws
-			SQLException{
-				ps.setString(1, pdto.getId());
-				idto.setId("admin");
-				idto.setTemOname("pr3");
-				getItem(idto);
-			}
-			});
-			
+		}catch(Exception e) {
+			System.out.println(" buyTicket()오류 :haveItem테이블에 id 비존재");
+		}
 			
 			getTotalPoint(pdto.getId());
 			System.out.println(getTotalPoint(pdto.getId()));
 			System.out.println("buyTicket()실행 완료");
 		}
 		else {
-			System.out.println("buyTicket()실행에 실패하셨습니다.");
+			System.out.println(" buyTicket()오류 :포인트 잔액 부족");
 		}
+		
 		
 			
 	}
@@ -91,27 +127,7 @@ public class PointDAO {
 	
 	
 	
-	//사용자 아이디를 얻어와서 거기서 구매한 스티커를 장착함.
-	public void getItem(final ItemDTO idto) {
-		template.update( new PreparedStatementCreator() {
-			
-			@Override
-			public PreparedStatement createPreparedStatement(Connection con) 
-					throws SQLException {
-			String sql = " INSERT INTO haveItem (id, temOname )"
-					+" VALUES (?,?)";
-			PreparedStatement psmt =
-					con.prepareStatement(sql);
-			psmt.setString(1, idto.getId());
-			psmt.setString(2, idto.getTemOname());
-			
-			System.out.println(sql);
-			System.out.println("사용자계정 getItem() 실행완료3 ");
-			return psmt;
-			}
-			
-		});
-		
-	}
+	
+	
 	
 }
