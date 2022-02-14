@@ -10,63 +10,22 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
-import point.JdbcTemplateConst;
-import point.PointDAO;
-import point.PointDTO;
+import item.ItemDAO;
 
 @Controller
-public class EmoticonController {
-	private JdbcTemplate template;
-	@Autowired
-	public void setTemplate(JdbcTemplate template) {
-		this.template = template;
-		System.out.println("@Autowired -> JDBCTemplate 연결 성공");
-		
-		JdbcTemplateConst.template = this.template;
-	}
-	
-	private PointDAO dao;
-	
-	//이모티콘 디스플레이 페이지
-	@RequestMapping("/emoticon/displayEmoticon.do")
-	public String displayEmoticon() {
-		return "emoticon/display";
-	}
-	//이모티콘 구매과정
-	@RequestMapping("/emoticon/buyProcess.do")
-	public String buyProcess(HttpServletRequest request, PointDTO pdto, Model model) {
-		//String pr = request.getParameter("pr"); //여기까지는 pr이 넘어오지만, model을 통해서는 pr값을 넘길 수 없음.
-		//String sticker = request.getParameter("sticker"); //PointDAO에 정의되어있기때문에 pr이 넘어감
-	
-		model.addAttribute("pdto",pdto);
-		
-		return "emoticon/buyProcess";
-	}
-	
-	//카카오페이 실행 연습페이지
-	@RequestMapping("/emoticon/practice.do")
-	public String payPractice() {
-		return "emoticon/practice";
-	}
-	
-	//카카오페이 실행 연습페이지
-	@RequestMapping("/emoticon/imKakaopayPage.do")
-	public String kakaopayPage() {
-		return "emoticon/imKakaopay";
-	}
-	
-	@GetMapping("kakaopay2")
+public class kakaoPayContoller {
+
+	@RequestMapping("kakaopay")
 	@ResponseBody
 	public String kakaopay() {
 		
@@ -85,9 +44,9 @@ public class EmoticonController {
 			connection.setDoOutput(true);
 			
 			String parameter="cid=TC0ONETIME&partner_order_id=partner_order_id"
-					+"&approval_url=http://localhost/:8081"
-					+"&fail_url=https://localhost/fail"
-					+"&cancel_url=https://localhost/cancel";
+					+"&approval_url=http://localhost:8081/"
+					+"&fail_url=http://localhost:8081/"
+					+"&cancel_urlhttp://localhost:8081/";
 			//서버에 전달하기 위한
 			OutputStream out = connection.getOutputStream();
 			//데이터를 주는데, 서버에 전달한 out을 매개변수로 데이터를 준다.
@@ -103,15 +62,19 @@ public class EmoticonController {
 			InputStream in;
 			if(result ==200) {
 				in = connection.getInputStream();
-			}else {
+				System.out.println("ajax 통신성공");
+			}
+			else {
 				//에러를 받는다.
 				in = connection.getErrorStream();
+				System.out.println("ajax 통신실패");
 			}
-			
+			System.out.println("result값은 "+result);
 			//inRead(받는걸 읽는애)로 in(받는애)를 parameter로 받음 
 			InputStreamReader inRead = new InputStreamReader(in); 
 			//inRead를 형변환 해준다.
 			BufferedReader change = new BufferedReader(inRead);
+			System.out.println(parameter);
 			return change.readLine();
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -123,9 +86,4 @@ public class EmoticonController {
 		
 		return "";
 	}
-	
-	
-	
-
-	
 }
