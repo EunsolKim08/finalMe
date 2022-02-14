@@ -29,6 +29,11 @@
 	</li>
 	<li>
 		<a href="./emoticon/practice.do" target="_blank">
+			 연습페이지
+		</a>
+	</li>
+	<li>
+		<a href="./emoticon/kakaopayPage.do" target="_blank">
 			카카오페이 실행 연습페이지
 		</a>
 	</li>
@@ -47,7 +52,8 @@
 	//idto.setTemOname("pr2");
 	
 	//pdao.buySticker(pdto,idto);
-	//구매시 포인트 차감dao.buySticker(dto);
+	//구매시 포인트 차감
+	pdao.buySticker(pdto,idto);
 	//아이디를 통해 포인트 ㄱㄱ dao.getTotalPoint(id);
 	//pdao.addPoint("review", pdto);
 	%>

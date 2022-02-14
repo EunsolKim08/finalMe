@@ -59,9 +59,69 @@ public class EmoticonController {
 	public String payPractice() {
 		return "emoticon/practice";
 	}
+	
+	//카카오페이 실행 연습페이지
+	@RequestMapping("/emoticon/kakaopayPage.do")
+	public String kakaopayPage() {
+		return "emoticon/kakaopay";
+	}
+	
 	@GetMapping("kakaopay")
 	@ResponseBody
 	public String kakaopay() {
+	try {
+		URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
+		HttpURLConnection connection = (HttpURLConnection) address.openConnection(); // 서버연결
+		connection.setRequestMethod("POST");    
+		connection.setRequestProperty("Authorization", "KakaoAK 8d0ba42fb4ca1001d7004e52945fc844"); // 어드민 키
+		connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		connection.setDoOutput(true); // 서버한테 전달할게 있는지 없는지
+		
+		String parameter = "cid=TC0ONETIME" // 가맹점 코드
+				+ "&partner_order_id=partner_order_id" // 가맹점 주문번호
+				+ "&partner_user_id=partner_user_id" // 가맹점 회원 id
+				+ "&item_name=point" // 상품명
+				+ "&quantity=1" // 상품 수량
+				+ "&total_amount=1000" // 총 금액
+				+ "&vat_amount=200" // 부가세
+				+ "&tax_free_amount=0" // 상품 비과세 금액
+				+ "&approval_url=http://localhost:8081/" // 결제 성공 시
+				+ "&fail_url=http://localhost:8081/"; // 결제 실패 시
+		
+		OutputStream send = connection.getOutputStream(); 
+		DataOutputStream dataSend = new DataOutputStream(send); 
+		dataSend.writeBytes(parameter); 
+		dataSend.close(); // 
+		
+		int result = connection.getResponseCode();
+		InputStream receive;
+		
+		if(result == 200) {
+			receive = connection.getInputStream();
+		}else {
+			receive = connection.getErrorStream();
+		}
+		
+		InputStreamReader read = new InputStreamReader(receive);
+		BufferedReader change = new BufferedReader(read);
+		
+		return change.readLine();
+	} catch (MalformedURLException e) {	
+		e.printStackTrace();
+	} catch (IOException e) {		
+		e.printStackTrace();
+	}
+			
+
+	return "";
+		
+	}
+	
+	
+	
+	@GetMapping("kakaopay2")
+	@ResponseBody
+	public String kakaopay2() {
 		try {
 			// 보내는 부분
 			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
