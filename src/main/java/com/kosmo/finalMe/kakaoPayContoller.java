@@ -138,9 +138,9 @@ public class kakaoPayContoller {
 					+ "&total_amount=5000" // 총 금액
 					+ "&vat_amount=200" // 부가세
 					+ "&tax_free_amount=0" // 상품 비과세 금액
-					+ "&approval_url=http://localhost:8081/" // 결제 성공 시
-					+ "&fail_url=http://localhost:8081/" // 결제 실패 시
-					+ "&cancel_url=http://localhost:8081/";
+					+ "&approval_url=http://localhost:8081/finalMe/payResult/resultSuccess.do" // 결제 성공 시
+					+ "&fail_url=http://localhost:8081/finalMe/payResult/resultFailure.do" // 결제 실패 시
+					+ "&cancel_url=http://localhost:8081/finalMe/payResult/resultCancel.do";
 
 
 
