@@ -12,11 +12,16 @@
 
 <script type = "text/javascript">
 
+$(document).ready(function () {
+    $('#radioButton2').click(function () {
+      // getter
+      var radioVal = $('input[name="radioTxt"]:checked').val();
+      alert('구매할 스티커를 체크해주세요');
+    });
+  });
+
+
 function confirmForm(form){
-		if ( ! $('input[name=sticker]:checked').val()) {
-		alert('항목을 선택해주세요.');
-		return false;
-		}
 		var confirmed = confirm("정말로 구매하시겠습니까?");
 		if(confirmed){
 			var form = document.buyFrm;
@@ -25,8 +30,6 @@ function confirmForm(form){
 			form.submit(); 	
 		}
 }
-
-
 </script>
 </head>
 <body>
@@ -74,8 +77,19 @@ function confirmForm(form){
 			</td>
 		</tr>
 	</table>
+	   <li>
+        <input type="radio" name="radioTxt" value="Apple" >Apple
+      </li>
+      <li>
+        <input type="radio" name="radioTxt" value="Grape">Grape
+      </li>
+      <li>
+        <input type="radio" name="radioTxt" value="Banana">Banana
+      </li>
+    </ul>
+    <button type="button" name="button" id="radioButton2">get radio Value</button>
 </form>
-<button type="submit" class="btn btn-danger" onClick="confirmForm(this)">구매하기</button>
+<button type="submit" id="radioButton" class="btn btn-danger" >구매하기</button>
 
 
 </div>

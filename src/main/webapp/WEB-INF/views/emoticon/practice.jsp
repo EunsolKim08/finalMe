@@ -18,30 +18,28 @@ if ( ! $('input[name=answer_2]:checked').val()) {
 </script>
 </head>
 <body>
-<div class="container">
+    <ul>
+      <li>
+        <input type="radio" name="radioTxt" value="Apple" >Apple
+      </li>
+      <li>
+        <input type="radio" name="radioTxt" value="Grape">Grape
+      </li>
+      <li>
+        <input type="radio" name="radioTxt" value="Banana">Banana
+      </li>
+    </ul>
+    <button type="button" name="button" id="radioButton">get radio Value</button>
+    <button type="button" name="button" id="radioButton2">set radio Value</button>
 
-<h2>연습 페이지</h2>
-<form>
-<ul class="answer" name="buyFrm" method="post" action="./buyProcess.do">
-	<li>
-		<input type="radio" name="answer_2" id="an_1"><label for="an_1">매우 아니다</label>
-	</li>
-	<li>
-		<input type="radio" name="answer_2" id="an_2"><label for="an_2">아니다</label>
-	</li>
-	<li>
-		<input type="radio" name="answer_2" id="an_3"><label for="an_3">보통</label>
-	</li>
-	<li>
-		<input type="radio" name="answer_2" id="an_4"><label for="an_4">그렇다</label>
-	</li>
-	<li>
-		<input type="radio" name="answer_2" id="an_5"><label for="an_5">매우 그렇다</label>
-	</li>
-</ul>
-</form>
-<input type="submit" value="제출"/>
-
-</div>
-</body>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#radioButton').click(function () {
+          // getter
+          var radioVal = $('input[name="radioTxt"]:checked').val();
+          alert('구매할 스티커를 체크해주세요');
+        });
+      });
+    </script>
+  </body>
 </html>

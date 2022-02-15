@@ -25,6 +25,7 @@
 				success:function(data){
 					alert("ajax 통신완료");
 					alert(data.tid);
+					alert(data.total_amount);
 					var box = data.next_redirect_pc_url;
 					window.open(box);
 				},
@@ -35,6 +36,7 @@
 		});
 	});
 	</script>
+	
 </head>
 <body>
 	<h2>이모티콘 구현하기</h2>
@@ -57,6 +59,11 @@
 	<li>
 		<a href="./emoticon/imKakaopayPage.do" target="_blank">
 			아임 카카오 실행페이지
+		</a>
+	</li>
+	<li>
+		<a href="./emoticon/oriKakaopayPage.do" target="_blank">
+			오리지널 카카오 실행페이지
 		</a>
 	</li>
 	<%
