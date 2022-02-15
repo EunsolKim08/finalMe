@@ -47,14 +47,17 @@ public class kakaoPayContoller {
 			String parameter = "cid=TC0ONETIME" // 가맹점 코드
 					+ "&partner_order_id=partner_order_id" // 가맹점 주문번호
 					+ "&partner_user_id=partner_user_id" // 가맹점 회원 id
-					+ "&item_name=sticker" // 상품명
+					+ "&item_name=초코파이" // 상품명
 					+ "&quantity=1" // 상품 수량
 					+ "&total_amount=5000" // 총 금액
-					+ "&vat_amount=0" // 부가세
+					+ "&vat_amount=200" // 부가세
 					+ "&tax_free_amount=0" // 상품 비과세 금액
-					+ "&approval_url=http://localhost:8081/" // 결제 성공 시
+					+ "&approval_url=http://localhost:8081/finalMe/" // 결제 성공 시
 					+ "&fail_url=http://localhost:8081/" // 결제 실패 시
-					+ "&cancel_url=http://localhost:8081/"; // 결제 취소 시
+					+ "&cancel_url=http://localhost:8081/";
+
+
+
 			
 			//서버에 전달하기 위한
 			OutputStream out = connection.getOutputStream();
@@ -118,14 +121,17 @@ public class kakaoPayContoller {
 			String parameter = "cid=TC0ONETIME" // 가맹점 코드
 					+ "&partner_order_id=partner_order_id" // 가맹점 주문번호
 					+ "&partner_user_id=partner_user_id" // 가맹점 회원 id
-					+ "&item_name=sticker" // 상품명
+					+ "&item_name=초코파이" // 상품명
 					+ "&quantity=1" // 상품 수량
 					+ "&total_amount=5000" // 총 금액
-					+ "&vat_amount=0" // 부가세
+					+ "&vat_amount=200" // 부가세
 					+ "&tax_free_amount=0" // 상품 비과세 금액
 					+ "&approval_url=http://localhost:8081/" // 결제 성공 시
 					+ "&fail_url=http://localhost:8081/" // 결제 실패 시
-					+ "&cancel_url=http://localhost:8081/"; // 결제 취소 시
+					+ "&cancel_url=http://localhost:8081/";
+
+
+
 			
 			//서버에 전달하기 위한
 			OutputStream out = connection.getOutputStream();
