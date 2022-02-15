@@ -25,6 +25,21 @@ import item.ItemDAO;
 @Controller
 public class kakaoPayContoller {
 
+	//결제성공
+	@RequestMapping("/payResult/resultSuccess.do")
+	public String payResultSuccess() {
+		return "payResult/success";
+	}
+	//결제실패
+	@RequestMapping("/payResult/resultFailure.do")
+	public String payResultFailure() {
+		return "payResult/failure";
+	}
+	//결제실패
+	@RequestMapping("/payResult/resultCancel.do")
+	public String payResultCancel() {
+		return "payResult/cancel";
+	}
 	//home.jsp에서 연습할때 사용한 컨트롤러 매핑
 	@RequestMapping("kakaopay")
 	@ResponseBody
@@ -52,12 +67,9 @@ public class kakaoPayContoller {
 					+ "&total_amount=5000" // 총 금액
 					+ "&vat_amount=200" // 부가세
 					+ "&tax_free_amount=0" // 상품 비과세 금액
-					+ "&approval_url=http://localhost:8081/finalMe/" // 결제 성공 시
-					+ "&fail_url=http://localhost:8081/" // 결제 실패 시
-					+ "&cancel_url=http://localhost:8081/";
-
-
-
+					+ "&approval_url=http://localhost:8081/finalMe/payResult/resultSuccess.do" // 결제 성공 시
+					+ "&fail_url=http://localhost:8081/finalMe/payResult/resultFailure.do" // 결제 실패 시
+					+ "&cancel_url=http://localhost:8081/finalMe/payResult/resultCancel.do";
 			
 			//서버에 전달하기 위한
 			OutputStream out = connection.getOutputStream();

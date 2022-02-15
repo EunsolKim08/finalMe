@@ -66,6 +66,16 @@
 			오리지널 카카오 실행페이지
 		</a>
 	</li>
+	<li>
+		<a href="./payResult/resultSuccess.do" target="_blank">
+			결제성공
+		</a>
+	</li>
+	<li>
+		<a href="./payResult/resultFailure.do" target="_blank">
+			결제실패
+		</a>
+	</li>
 	<%
 	Map<String, Object> param = new HashMap<String, Object>();
 	PointDAO pdao = new PointDAO();
