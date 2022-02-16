@@ -12,16 +12,15 @@
 
 <script type = "text/javascript">
 
-$(document).ready(function () {
-    $('#radioButton2').click(function () {
-      // getter
-      var radioVal = $('input[name="radioTxt"]:checked').val();
-      alert('구매할 스티커를 체크해주세요');
-    });
-  });
-
 
 function confirmForm(form){
+		/////여기에 form의 라디오 버튼이 빈값인지를 확인해야함.
+		
+	var buyOne = false;
+	for(var i = 0; i<form.sticker.length;i++){
+		
+	}
+		
 		var confirmed = confirm("정말로 구매하시겠습니까?");
 		if(confirmed){
 			var form = document.buyFrm;
@@ -89,7 +88,7 @@ function confirmForm(form){
     </ul>
     <button type="button" name="button" id="radioButton2">get radio Value</button>
 </form>
-<button type="submit" id="radioButton" class="btn btn-danger" >구매하기</button>
+<button type="submit" class="btn btn-danger" onClick="confirmForm(this)" >구매하기</button>
 
 
 </div>
