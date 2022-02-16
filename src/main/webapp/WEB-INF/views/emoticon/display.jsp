@@ -11,24 +11,43 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 
 <script type = "text/javascript">
-
-
-function confirmForm(form){
-		/////여기에 form의 라디오 버튼이 빈값인지를 확인해야함.
-		
-	var buyOne = false;
-	for(var i = 0; i<form.sticker.length;i++){
-		
-	}
-		
-		var confirmed = confirm("정말로 구매하시겠습니까?");
-		if(confirmed){
-			var form = document.buyFrm;
-			form.method="post"; 
-			form.action="./buyProcess.do";
-			form.submit(); 	
+var isValidate = function(frm){
+	var isOk = false;
+	for(var i = 0; i<frm.sticker.length;i++){
+		if(frm.sticker[i].checked == true){
+			isOk = true;
+			break;
 		}
+	}
+	
+	if(isOk != true){
+		alert('구매하실 스티커를 선택해주세요.');
+		return false;
+	}
+	
+	var confirmed = confirm("정말로 구매하시겠습니까?");
+	if(confirmed){
+		var form = document.buyFrm;
+		form.method="post"; 
+		form.action="./buyProcess.do";
+		form.submit(); 	
+	}
 }
+
+function confirmForm(form){          
+    if(form.radioTxt.checked==false){
+       alert("구매할 스티커를 체크해주세요");
+       return;
+    }
+    var confirmed = confirm("정말로 구매하시겠습니까?");
+    if(confirmed==true){
+       form.method="post";
+       form.action="폼값전송할URL";
+       form.submit();
+    }
+ }
+
+
 </script>
 </head>
 <body>
@@ -38,7 +57,7 @@ function confirmForm(form){
 <br /><br />
 
 <h3>스티커 출력하기1</h3>
-<form name="buyFrm" method="post">
+<form name="buyFrm" method="get" onsubmit="return isValidate(this);">
 	<input type="text" name="id" value="실험용" />
 	<table class="table table-bordered" style="width:500px; height:500px;">
 		<tr>
@@ -75,22 +94,19 @@ function confirmForm(form){
 				<input type="radio" id="iceflake" name="sticker" value="iceflake">
 			</td>
 		</tr>
+		
+		
 	</table>
-	   <li>
-        <input type="radio" name="radioTxt" value="Apple" >Apple
-      </li>
-      <li>
-        <input type="radio" name="radioTxt" value="Grape">Grape
-      </li>
-      <li>
-        <input type="radio" name="radioTxt" value="Banana">Banana
-      </li>
-    </ul>
-    <button type="button" name="button" id="radioButton2">get radio Value</button>
+	<button type="submit" class="btn btn-danger" >구매하기</button>
 </form>
-<button type="submit" class="btn btn-danger" onClick="confirmForm(this)" >구매하기</button>
-
-
+<br/><br/>
+<form name="buyFrm2">
+      <input type="radio" name="radioTxt" value="Y">사람1
+      <input type="radio" name="radioTxt" value="Y">사람2
+      <br/><br/>
+      <input type="button" onclick="confirmForm(this.form);" class="btn btn-danger" value="선택하기 예시2">
+</form>
 </div>
+
 </body>
 </html>
