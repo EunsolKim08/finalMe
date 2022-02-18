@@ -1,3 +1,4 @@
+<%@page import="item.ItemDAO"%>
 <%@page import="item.ItemDTO"%>
 <%@page import="point.PointDTO"%>
 <%@page import="java.util.Map"%>
@@ -76,12 +77,31 @@
 			결제실패
 		</a>
 	</li>
+	<li>
+		<a href="./uploadPath.do" target="_blank">
+			upload폴더의 물리적 경로 확인하기
+		</a>
+	</li>
+	<li>
+		<a href="./uploadForm.do" target="_blank">
+			파일업로드 폼(admin 계정으로 아이템 등록)
+		</a>
+	</li>
+	<li>
+		<a href="./uploadList.do" target="_blank">
+			파일업로드 리스트(admin 아이템 사용)
+		</a>
+	</li>
 	<%
 	Map<String, Object> param = new HashMap<String, Object>();
 	PointDAO pdao = new PointDAO();
 	
 	PointDTO pdto = new PointDTO();
 	ItemDTO idto = new ItemDTO();
+	ItemDAO idao = new ItemDAO();
+	
+	//idto.setTemOname("prtest");
+//	idao.adimnItem(idto);
 	
 	
 	
@@ -92,7 +112,7 @@
 	
 	//pdao.buySticker(pdto,idto);
 	//구매시 포인트 차감
-	pdao.buySticker(pdto,idto);
+	//pdao.buySticker(pdto,idto);
 	//아이디를 통해 포인트 ㄱㄱ dao.getTotalPoint(id);
 	//pdao.addPoint("review", pdto);
 	%>

@@ -57,7 +57,7 @@ public class ItemDAO {
 			});			
 		}
 		
-				//사용자 아이디를 얻어와서 거기서 구매한 스티커를 장착함.
+		//사용자 아이디를 얻어와서 거기서 구매한 스티커를 장착함.
 		public void getItem2(final ItemDTO idto) {
 			try {
 						template.update( new PreparedStatementCreator() {
@@ -86,6 +86,31 @@ public class ItemDAO {
 					
 					}
 		}
+		
+		//어드민 아이디로 adminItem table에 상품을 등록함.
+		public void adimnItem(final ItemDTO idto) {
+			try {
+				template.update(new PreparedStatementCreator() {
+
+					@Override
+					public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+						String sql= " INSERT INTO adminItem (id,idx ,temOname) "
+								+ " VALUES ('admin', myitem_seq.nextval ,?)";
+						PreparedStatement psmt = con.prepareStatement(sql);
+						psmt.setString(1, idto.getTemOname());
+						
+						return psmt;
+					}
+					
+				});
+			}catch(Exception e) {
+				System.out.println("admin Item()중 오류가 발생했습니다.");
+			}
+			
+		}
+		
+		//아이템 관리자 페이지에서 이미지 등록
+		
 
 	
 
