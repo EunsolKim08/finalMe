@@ -53,6 +53,11 @@
 		</a>
 	</li>
 	<li>
+		<a href="./shop.do" target="_blank">
+			이모티콘 샵
+		</a>
+	</li>
+	<li>
 		<a href="./emoticon/practice.do" target="_blank">
 			 연습페이지
 		</a>

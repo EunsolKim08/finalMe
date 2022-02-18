@@ -13,7 +13,7 @@
 <body>
 <div class="container">
 
-<h2>파일업로드 폼</h2>
+<h2>admin계정으로 아이템 등록하기</h2>
 <form name="fileFrm" method="post" action="uploadAction.do"	enctype="multipart/form-data" >		
 	<table class="table table-bordered" style="width:500px;">
 		<colgroup>
@@ -23,19 +23,13 @@
 		<tr>
 			<th>제목</th>
 			<td>
-				<input type="text" name="title" value="제목입니다." />
+				<input type="text" name="title"/>
 			</td>			
 		</tr>
 		<tr>
 			<th>첨부파일1</th>
 			<td>
 				<input type="file" name="userfile1" />
-			</td>			
-		</tr>
-		<tr>
-			<th>첨부파일2</th>
-			<td>
-				<input type="file" name="userfile2" />
 			</td>			
 		</tr>
 		<tr>

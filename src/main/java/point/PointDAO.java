@@ -42,8 +42,9 @@ public class PointDAO {
 	  
 	  구매완료시 해당 id의 item에 temOName에 등록됨.
 	 */
-	public void buySticker(final PointDTO pdto, final ItemDTO idto) {
+	public boolean buySticker(final PointDTO pdto, final ItemDTO idto) {
 		final ItemDAO idao = new ItemDAO();
+		boolean flag = false;
 		
 		if(getTotalPoint(pdto.getId())>=10000) {
 			String sql = " UPDATE point SET point = point - 10000 "
@@ -63,14 +64,13 @@ public class PointDAO {
 				});
 			getTotalPoint(pdto.getId());
 			System.out.println(getTotalPoint(pdto.getId()));
+			flag=true;
 			System.out.println("buyTicket()실행 완료");
 		}
 		else {
 			System.out.println(" buyTicket()오류 :포인트 잔액 부족");
 		}
-		
-		
-			
+		return flag;
 	}
 	public void buySticker2(final PointDTO pdto, final ItemDTO idto) {
 		

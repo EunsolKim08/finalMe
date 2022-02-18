@@ -12,14 +12,12 @@
 <body>
 <div class="container">
 
-	<h2>upload폴더의 파일목록 보기</h2>
+	<h2>upload폴더의 파일목록 보기(후에 디스플레이 페이지로 변경)</h2>
 
 	<ul>
 	<c:forEach items="${fileMap }" var="file" varStatus="vs">		
 		<li>
 			파일명 : ${file.key }
-			&nbsp;&nbsp;
-			파일크기 : ${file.value }Kb
 			&nbsp;&nbsp;
 			<!--  
 			fileName : 서버에 저장된 파일명

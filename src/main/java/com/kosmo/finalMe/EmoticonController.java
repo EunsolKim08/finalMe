@@ -58,6 +58,35 @@ public class EmoticonController {
 		return "emoticon/display";
 	}
 	//이모티콘 디스플레이 페이지
+		@RequestMapping("/shop.do")
+		public String shop(HttpServletRequest req, Model model) {
+			//물리적경로 얻어오기
+			String path = req.getSession().getServletContext().getRealPath("/resources/upload");
+			//경로를 기반으로 파일객체 생성
+			File file = new File(path);
+			//파일의 목록을 배열 형태로 얻어옴
+			File[] fileArray = file.listFiles();
+			//View로 전달할 파일목록 저장을 위해 Map컬렉션 생성
+			Map<String, Integer> fileMap = new HashMap<String, Integer>();		
+			for(File f : fileArray){
+				//key와 value로 파일명과 파일용량을 저장한다. 
+				fileMap.put(f.getName(), (int)Math.ceil(f.length()/1024.0));
+			}
+			
+			model.addAttribute("fileMap", fileMap);		
+			return "emoticon/shop";
+		}
+		
+		
+	//
+		@RequestMapping("/buyProcess.do")
+		public String realBuyProcess(HttpServletRequest request, PointDTO pdto, Model model) {
+	
+			model.addAttribute("pdto",pdto);
+			
+			return "emoticon/buyProcess";
+		}
+	//이모티콘 디스플레이 페이지
 		@RequestMapping("/displayEmoticon2.do")
 		public String displayEmoticon2() {
 			return "/display2";
