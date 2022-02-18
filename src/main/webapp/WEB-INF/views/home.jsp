@@ -40,15 +40,15 @@
 </head>
 <body>
 	<h2>이모티콘 구현하기</h2>
-	<li>
-		<a href="../Template/index.jsp" target="_blank">
-			템플릿 연결
-		</a>
-	</li>
 	<br /><br />
 	<li>
 		<a href="./emoticon/displayEmoticon.do" target="_blank">
 			이모티콘 디스플레이 페이지 
+		</a>
+	</li>
+	<li>
+		<a href="./displayEmoticon2.do" target="_blank">
+			리얼 이모티콘 디스플레이페이지2
 		</a>
 	</li>
 	<li>

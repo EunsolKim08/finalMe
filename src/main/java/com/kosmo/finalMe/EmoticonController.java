@@ -43,6 +43,11 @@ public class EmoticonController {
 	public String displayEmoticon() {
 		return "emoticon/display";
 	}
+	//이모티콘 디스플레이 페이지
+		@RequestMapping("/displayEmoticon2.do")
+		public String displayEmoticon2() {
+			return "/display2";
+		}
 	//이모티콘 구매과정
 	@RequestMapping("/emoticon/buyProcess.do")
 	public String buyProcess(HttpServletRequest request, PointDTO pdto, Model model) {
