@@ -81,7 +81,10 @@ public class EmoticonController {
 	//
 		@RequestMapping("/buyProcess.do")
 		public String realBuyProcess(HttpServletRequest request, PointDTO pdto, Model model) {
-	
+			String sticker = request.getParameter("sticker");
+		
+			pdto.setSticker(sticker);
+			System.out.println(pdto.getSticker());
 			model.addAttribute("pdto",pdto);
 			
 			return "emoticon/buyProcess";
@@ -185,7 +188,7 @@ public class EmoticonController {
 				String saveFileName = getUuid() + ext;
 				idto.setTemSname(saveFileName);
 				//물리적경로에 새롭게 생성된 파일명으로 파일 저장
-				mfile.transferTo(new File(path + File.separator + saveFileName));
+				mfile.transferTo(new File(path + File.separator + originalName));
 				
 				//폼값과 파일명을 저장할 Map컬렉션 생성
 				Map<String, String> fileMap = new HashMap<String, String>();	

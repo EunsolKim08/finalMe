@@ -46,6 +46,7 @@ public class PointDAO {
 		final ItemDAO idao = new ItemDAO();
 		boolean flag = false;
 		
+		
 		if(getTotalPoint(pdto.getId())>=10000) {
 			String sql = " UPDATE point SET point = point - 10000 "
 					
@@ -57,12 +58,13 @@ public class PointDAO {
 				SQLException{
 					ps.setString(1, pdto.getId());
 					idto.setId(pdto.getId());
-					idto.setTemOname("pr");
+					System.out.println("구매한 아이템 :"+ pdto.getSticker());
+					idto.setTemOname(pdto.getSticker());
 					idao.getItem(idto);
 					//idao.getItem2(idto);
 				}
 				});
-			getTotalPoint(pdto.getId());
+			
 			System.out.println(getTotalPoint(pdto.getId()));
 			flag=true;
 			System.out.println("buyTicket()실행 완료");

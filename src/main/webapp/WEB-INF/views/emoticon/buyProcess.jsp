@@ -34,7 +34,8 @@ pdto.setId("ptest");
 //idto.setTemOname("pr2");
 
 //구매시 포인트 차감
-boolean buyFlag= pdao.buySticker(pdto,idto);
+idto.setTemOname("sticker");
+pdao.buySticker(pdto,idto);
 //아이디를 통해 포인트 ㄱㄱ dao.getTotalPoint(id);
 //pdao.addPoint("review", pdto);
 %>
@@ -43,19 +44,14 @@ boolean buyFlag= pdao.buySticker(pdto,idto);
 <div class="container">
 <h2>구매과정 페이지2</h2>
 
-<%
-	if(buyFlag == true){
-%>
+
 구매 아이디: ${pdto.id}
+<br/>
 구매스티커: ${pdto.sticker}
+<br/>
 잔여포인트: ${pdto.point}
-<%
-	}else{
-%>
-	<h3>스티커 구매에 실패했습니다.</h3>
-<%
-} 
-%>
+<br/>
+
 
 </div>
 </body>

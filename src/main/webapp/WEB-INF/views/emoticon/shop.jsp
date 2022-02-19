@@ -65,17 +65,15 @@ function confirmForm(form){
 	<form name="buyFrm" method="get" onsubmit="return isValidate(this);">
 		<table class="table table-bordered" style="width:500px; height:500px;">
 		<c:forEach items="${fileMap }" var="file" varStatus="vs">
-			<tr>		
-				<td>
-					파일명 : ${file.key }
+		<tr>
+			<td>		
 					&nbsp;&nbsp;
-					<img src="./resources/upload/${file.key }" style="width:100px; height:100px; align:center;">
+					<img src="./resources/upload/${file.key}" style="width:100px; height:100px; align:center;">
 					<br/><br/><label for="earth"> ${file.key }</label>
 					<br/><br/>
 					<input type="radio" id="iceflake" name="sticker" value="${file.key }">
-				</td>
-			</tr>
-	
+			</td>
+		</tr>
 		</c:forEach>	
 		</table>
 		<button type="submit" class="btn btn-danger" >구매하기</button>
