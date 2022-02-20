@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +46,13 @@ public class kakaoPayContoller {
 		public String chargeBob() {
 			return "payResult/chargeBob";
 		}
+	//전체에서 사용할 변수 여기서 선언!	
+	String amount;
 	//결제과정
 	@RequestMapping("/chargeProcess.do")
-	public String chargeProcess() {
+	public String chargeProcess(HttpServletRequest request) {
+		amount = request.getParameter("money");
+		System.out.println("충전금액: "+amount);
 		return "payResult/chargeProcess";
 	}
 	//home.jsp에서 연습할때 사용한 컨트롤러 매핑
@@ -125,7 +130,6 @@ public class kakaoPayContoller {
 				@RequestMapping("kakaopay2")
 				@ResponseBody
 				public String kakaopay2() {
-					
 					try {
 						//요청 주소
 						URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
@@ -139,7 +143,6 @@ public class kakaoPayContoller {
 						connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 						//연결을 통해 서버에 전달할것이 있다면 true.
 						connection.setDoOutput(true);
-						String amount = "10000";
 						
 						String parameter = "cid=TC0ONETIME" // 가맹점 코드
 								+ "&partner_order_id=partner_order_id" // 가맹점 주문번호

@@ -31,6 +31,7 @@ var isValidate = function(frm){
 		form.action="./chargeProcess.do";
 		form.submit(); 	
 	}
+		
 }
 </script>
 
@@ -58,7 +59,7 @@ var isValidate = function(frm){
 			</td>
 		</tr>
 	</table>
-	<button type="submit" class="btn btn-danger" >충전하기</button>
+	<button id="apibtn" type="submit" class="btn btn-danger" >충전하기</button>
 </form>
 </div>
 </body>
