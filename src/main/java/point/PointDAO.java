@@ -171,16 +171,14 @@ public class PointDAO {
 	}
 	
 	//카카오페이 결제시 밥알(포인트)가 충전됨.
-	public void buyPonts(final PointDTO pdto) {
+	public void buyPonts(final PointDTO pdto, String payResult) {
 		int pt =0;
 		
-		int payResult=0;
-		
-		if(payResult == 1) {
+		if(payResult.equals("1000")) {
 			pt = 50000;
-		}else if(payResult == 2) {
+		}else if(payResult.equals("3000")) {
 			pt = 157500;
-		}else if(payResult == 3) {
+		}else if(payResult.equals("5000")) {
 		    pt = 275000;
 		}
 		String sql = " UPDATE point SET point = point + "+ pt

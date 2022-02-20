@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import item.ItemDAO;
+import point.PointDAO;
+import point.PointDTO;
 
 @Controller
 public class kakaoPayContoller {
@@ -46,6 +48,7 @@ public class kakaoPayContoller {
 		public String chargeBob() {
 			return "payResult/chargeBob";
 		}
+	
 	//전체에서 사용할 변수 여기서 선언!	
 	String amount;
 	//결제과정
@@ -130,6 +133,11 @@ public class kakaoPayContoller {
 				@RequestMapping("kakaopay2")
 				@ResponseBody
 				public String kakaopay2() {
+					boolean flag = false;
+					PointDAO pdao = new PointDAO();
+					PointDTO pdto = new PointDTO();
+					//테스트용. 후에는 sessioned Id로 교체해야함
+					pdto.setId("ptest");
 					try {
 						//요청 주소
 						URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
@@ -184,6 +192,10 @@ public class kakaoPayContoller {
 						//inRead를 형변환 해준다.
 						BufferedReader change = new BufferedReader(inRead);
 						System.out.println(parameter);
+						flag = true;
+						if(flag == true) {
+							pdao.buyPonts(pdto, amount);
+						}
 						return change.readLine();
 					} catch (MalformedURLException e) {
 						// TODO Auto-generated catch block
