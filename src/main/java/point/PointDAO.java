@@ -194,7 +194,7 @@ public class PointDAO {
 					ps.setString(1, pdto.getId());
 				}
 				});
-			
+		System.out.println("밥알교환 addPoint() 실행 완료");	
 			
 		}catch(Exception e) {
 			System.out.println(" addPoint() 실행중 오류");
