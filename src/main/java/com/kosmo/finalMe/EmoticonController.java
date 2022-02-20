@@ -80,11 +80,30 @@ public class EmoticonController {
 		
 	//
 		@RequestMapping("/buyProcess.do")
-		public String realBuyProcess(HttpServletRequest request, PointDTO pdto, Model model) {
+		public String realBuyProcess(HttpServletRequest request,  Model model) {
 			String sticker = request.getParameter("sticker");
-		
+			PointDAO pdao = new PointDAO();
+			PointDTO pdto = new PointDTO();
+
+			ItemDTO idto = new ItemDTO();
+			ItemDAO idao = new ItemDAO();
+			//원래 sessionId를 넣어야할 자리에 임으로 ptest를 넣어줌
+			pdto.setId("ptest");
+			
 			pdto.setSticker(sticker);
-			System.out.println(pdto.getSticker());
+			idto.setTemOname(sticker);
+			//구매실행 
+			pdao.buySticker(pdto,idto);
+			/*
+			 해당 pdto아이디의 getTotalPoint를 얻어온 다음, 
+			 이를 pdto.setPoint로 이용해서 구매 이후의 포인트를 화면에 뿌릴 수 있음.
+			 */
+			pdto.setPoint(pdao.getTotalPoint(pdto.getId()));
+			
+			System.out.println("보유포인트1은 "+pdao.getTotalPoint(pdto.getId()));
+			System.out.println("보유포인트2는"+ pdto.getPoint());
+			
+			model.addAttribute("pdao",pdao);
 			model.addAttribute("pdto",pdto);
 			
 			return "emoticon/buyProcess";

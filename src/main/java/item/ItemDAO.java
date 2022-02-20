@@ -57,36 +57,6 @@ public class ItemDAO {
 			});			
 		}
 		
-		//사용자 아이디를 얻어와서 거기서 구매한 스티커를 장착함.
-		public void getItem2(final ItemDTO idto) {
-			try {
-						template.update( new PreparedStatementCreator() {
-							int resultSet = 0;
-								
-						//이자체가 오류를 던진걸 catch하지는 못하는건가??
-						//만약 이게 안된다면 home에서 session.id가 있을때만 pdao.buySticker()를 호출하게함.
-								
-						@Override
-						public PreparedStatement createPreparedStatement(Connection con) 
-									throws SQLException {
-							String sql = " INSERT INTO haveItem (id, temOname )"
-									+" VALUES (?,?)";
-							PreparedStatement psmt = con.prepareStatement(sql);
-							psmt.setString(1, idto.getId());
-							psmt.setString(2, idto.getTemOname());
-									
-							System.out.println(sql);
-							System.out.println("사용자계정 getItem() 실행완료3 ");
-							return psmt;
-							}
-								
-						});		
-					}catch(Exception e) {
-						System.out.println("사용자 계정 getItem()중 오류가 발생했습니다.");
-					
-					}
-		}
-		
 		//어드민 아이디로 adminItem table에 상품을 등록함.
 		public void adimnItem(final ItemDTO idto) {
 			try {

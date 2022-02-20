@@ -15,30 +15,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<%
-Map<String, Object> param = new HashMap<String, Object>();
-PointDAO pdao = new PointDAO();
-
-PointDTO pdto = new PointDTO();
-ItemDTO idto = new ItemDTO();
-ItemDAO idao = new ItemDAO();
-
-//idto.setTemOname("prtest");
-//idao.adimnItem(idto);
-
-
-
-pdto.setId("ptest");
-//String id = pdto.getId();
-//idto.setId(id);
-//idto.setTemOname("pr2");
-
-//구매시 포인트 차감
-idto.setTemOname("sticker");
-pdao.buySticker(pdto,idto);
-//아이디를 통해 포인트 ㄱㄱ dao.getTotalPoint(id);
-//pdao.addPoint("review", pdto);
-%>
 
 <body>
 <div class="container">
@@ -51,6 +27,7 @@ pdao.buySticker(pdto,idto);
 <br/>
 잔여포인트: ${pdto.point}
 <br/>
+
 
 
 </div>

@@ -61,26 +61,29 @@ function confirmForm(form){
 
 	<h2>이모티콘샵</h2>
 
-	
+	<!-- vs를 이용해서 동적으로 테이블을 출력함 -->
 	<form name="buyFrm" method="get" onsubmit="return isValidate(this);">
-		<table class="table table-bordered" style="width:500px; height:500px;">
-		<c:forEach items="${fileMap }" var="file" varStatus="vs">
-		<tr>
-			<td>		
-					&nbsp;&nbsp;
-					<img src="./resources/upload/${file.key}" style="width:100px; height:100px; align:center;">
-					<br/><br/><label for="earth"> ${file.key }</label>
-					<br/><br/>
-					<input type="radio" id="iceflake" name="sticker" value="${file.key }">
-			</td>
-		</tr>
-		</c:forEach>	
+		<table class="table table-bordered" style="width:500px; height:400px;">
+			<tr>
+				<c:forEach items="${fileMap }" var="file" varStatus="vs">
+				<c:if test="${vs.index%3==0}"></tr><tr></c:if>
+					<td>		
+						&nbsp;&nbsp;
+						<img src="./resources/upload/${file.key}" style="width:100px; height:100px; align:center;">
+						<br/><br/><label for="${file.key }" style="algin:center;"> ${file.key }</label>
+						<br/><br/>
+						<input type="radio" id="iceflake" name="sticker" value="${file.key }"style="algin:center;">
+					</td>
+				</c:forEach>	
+			</tr>
 		</table>
 		<button type="submit" class="btn btn-danger" >구매하기</button>
 	</form>
 
 </div>	
 <br/><br/>
+
+
 
 
 </body>

@@ -64,9 +64,8 @@ public class PointDAO {
 					//idao.getItem2(idto);
 				}
 				});
-			
-			System.out.println(getTotalPoint(pdto.getId()));
 			flag=true;
+			System.out.println(getTotalPoint(pdto.getId()));
 			System.out.println("buyTicket()실행 완료");
 		}
 		else {
