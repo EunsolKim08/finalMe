@@ -63,22 +63,28 @@
 		</a>
 	</li>
 	<li>
-		<a href="./emoticon/imKakaopayPage.do" target="_blank">
+		<a href="./imKakaopayPage.do" target="_blank">
 			아임 카카오 실행페이지
 		</a>
 	</li>
 	<li>
-		<a href="./emoticon/oriKakaopayPage.do" target="_blank">
+		<a href="./oriKakaopayPage.do" target="_blank">
 			오리지널 카카오 실행페이지
 		</a>
 	</li>
 	<li>
-		<a href="./payResult/resultSuccess.do" target="_blank">
-			결제성공
+		<a href="./chargeBob.do" target="_blank">
+			교환페이지
 		</a>
 	</li>
 	<li>
-		<a href="./payResult/resultFailure.do" target="_blank">
+		<a href="./resultSuccess.do" target="_blank">
+			결제성공
+		</a>
+	</li>
+	
+	<li>
+		<a href="./resultFailure.do" target="_blank">
 			결제실패
 		</a>
 	</li>

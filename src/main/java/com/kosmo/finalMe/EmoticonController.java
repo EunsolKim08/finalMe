@@ -131,12 +131,12 @@ public class EmoticonController {
 	}
 	
 	//카카오페이 실행 연습페이지
-	@RequestMapping("/emoticon/imKakaopayPage.do")
+	@RequestMapping("/imKakaopayPage.do")
 	public String kakaopayPage() {
 		return "emoticon/imKakaopay";
 	}
 	//카카오페이 실행 연습페이지
-	@RequestMapping("/emoticon/oriKakaopayPage.do")
+	@RequestMapping("/oriKakaopayPage.do")
 	public String kakaopayPageOri() {
 		return "emoticon/oriKakaoPay";
 	}
