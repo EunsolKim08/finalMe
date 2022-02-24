@@ -2,7 +2,7 @@ package mybatis;
 
 import java.util.ArrayList;
 
-public interface IAdroidDAO {
+public interface IAndroidDAO {
 	
 	public ArrayList<BoardVO> memberList();
 

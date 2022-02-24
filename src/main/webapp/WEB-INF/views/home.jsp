@@ -103,6 +103,11 @@
 			파일업로드 리스트(admin 아이템 사용)
 		</a>
 	</li>
+	<li>
+		<a href="./boardObect.do" target="_blank">
+			안드로이드 회원리스트 가져오기(객체)
+		</a>
+	</li>
 	<%
 	Map<String, Object> param = new HashMap<String, Object>();
 	PointDAO pdao = new PointDAO();

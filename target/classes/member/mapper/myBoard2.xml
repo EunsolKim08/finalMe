@@ -6,7 +6,7 @@
 
 <mapper namespace="mybatis.IAndroidDAO">
 	
-	<select id="memberList" resultType="mybatis.BoardVO">
+	<select id="boardList" resultType="mybatis.BoardVO">
 		SELECT * FROM board
 	</select>
 </mapper>
